@@ -3,24 +3,25 @@ import "package:go_router/go_router.dart";
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
-  
-  get icon => null;
-
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      body: Center(child: Column(
-        children: [
-          Text(" HOLA MUNDO"),
-          ElevatedButton(
-            onPressed: () {
-              context.push('/login');
-            },
-            child: Text("Volver al Login"),
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            
+            children: [
+              Text(" oa"),
+              ElevatedButton(
+                onPressed: () {
+                  context.push('/login');
+                },
+                child: Text("Volver al Login"),
+              ),
+            ],
           ),
-        ],
-      ),)
-      
+        ),
     );
   }
 }

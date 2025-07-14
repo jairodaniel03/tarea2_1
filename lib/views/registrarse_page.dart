@@ -1,11 +1,14 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
 import "package:tarea2_1/views/Widgets/textfiel_login.dart";
+//import "package:tarea2_1/views/home_page.dart";
 
-class LoginPage extends StatelessWidget {
-   LoginPage({super.key});
+class Registrarse extends StatelessWidget {
+  Registrarse({super.key});
 
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
   final emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class LoginPage extends StatelessWidget {
               // Espacio superior
               Center(
                 child:Text(
-                  'Ingrese de nuevo :D',
+                  'Registrate :D',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -33,8 +36,27 @@ class LoginPage extends StatelessWidget {
                 ),
             ),
 
+            SizedBox(height: 20), 
 
-           
+          // TextFiel del nombre de usuario
+            TextfielLogin(
+              controller: usernameController,
+              keyboardType: TextInputType.text,
+              labelText: 'Nombre de Usuario', 
+              icon: Icon(Icons.person), 
+            ),
+
+            
+
+           //TexFiel del numero de telefono
+            SizedBox(height: 20),
+            TextfielLogin(
+              controller: phoneController,
+              keyboardType: TextInputType.phone,
+              labelText: 'Número de Teléfono', 
+              icon: Icon(Icons.phone), 
+            ),  
+
             //TexFiel del Correo Institucional
             SizedBox(height: 20),
             TextfielLogin(
@@ -64,8 +86,9 @@ class LoginPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   // cuando le falta de rellenar los textfields
-                  if( 
+                  if(usernameController.text.isEmpty ||
                       passwordController.text.isEmpty ||
+                      phoneController.text.isEmpty ||
                       emailController.text.isEmpty) {
                     showDialog(
                       context: context,
@@ -81,8 +104,8 @@ class LoginPage extends StatelessWidget {
                       );
                     return;
                     }
-                  // cuando la contraseña 
-                  if( !passwordController.text.contains(('20232001147'))){
+                  // cuando la contraseña es menor a 6 caracteres
+                  if(passwordController.text.length<6 || !passwordController.text.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.red,
@@ -98,7 +121,7 @@ class LoginPage extends StatelessWidget {
                   }
                 
                   // el correo institucional bien ingresado
-                  if(!emailController.text.contains('jdcruzz@unah.hn')){
+                  if(!emailController.text.contains('@unah.hn')){
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.red,
@@ -116,30 +139,15 @@ class LoginPage extends StatelessWidget {
                   
                 },
                 child: Text(
-                  'Iniciar Sesión',
+                  'Registrarse',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),),
               ),
-
             ),
-            SizedBox(height: 20),
-            // Botón de registrarse
-            TextButton(
-              onPressed: () {
-                context.push('/registrarse');
-              },
-              child: Text(
-                'Registrarse',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white70,
-                ),
-              ),
-            ),
+            
             ],
             )
         ) 

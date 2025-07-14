@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tarea2_1/views/home_page.dart';
 import 'package:tarea2_1/views/login_page.dart';
+import 'package:tarea2_1/views/registrarse_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,8 +27,12 @@ class MyApp extends StatelessWidget {
             path: '/login',
             builder: (context,state)=>  LoginPage(),
             
-          )
-
+          ),
+        GoRoute(
+          name:'registrarse',
+          path: '/registrarse',
+          builder: (context, state) => Registrarse(),
+        )
           
         ],
      )
