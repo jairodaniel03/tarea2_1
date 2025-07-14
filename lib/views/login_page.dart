@@ -10,24 +10,29 @@ class LoginPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final phoneController = TextEditingController();
   final emailController = TextEditingController();
-  
+  bool obscureText = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black26,
       body:SafeArea(
         child:Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            
+            
             children: [
               // Espacio superior
               Center(
                 child:Text(
-                  'Login',
+                  'Bienvenido a la App :D',
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blue,
+                    color: Colors.white70,
                     )
                 ),
             ),
@@ -70,12 +75,13 @@ class LoginPage extends StatelessWidget {
               obscureText: true,
               labelText: 'Contraseña', 
               icon: Icon(Icons.password), 
+              
             ),
           
-
-
+          //PRUEBA
+            
            // Botón de inicio de sesión
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             SizedBox(
               width: double.infinity, 
               child: ElevatedButton(
@@ -114,7 +120,7 @@ class LoginPage extends StatelessWidget {
                     );
                     return;
                   }
-
+                
                   // el correo institucional bien ingresado
                   if(!emailController.text.contains('jdcruzz@unah.hn')){
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -133,7 +139,13 @@ class LoginPage extends StatelessWidget {
                    context.push('/home');
                   
                 },
-                child: Text('Iniciar Sesión'),
+                child: Text(
+                  'Iniciar Sesión',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),),
               ),
             ),
             ],
