@@ -36,16 +36,19 @@ class LoginPage extends StatelessWidget {
           // TextFiel del nombre de usuario
             TextField(
               controller: usernameController,
+              keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 labelText: 'Nombre de usuario',
                 border: OutlineInputBorder(),
-                prefix: Icon(Icons.person),
+                prefixIcon: Icon(Icons.person),
               ),
             ),
 
            //TexFiel del numero de telefono
             SizedBox(height: 20),
             TextField(
+              controller: phoneController,
+              keyboardType: TextInputType.phone,
               decoration: InputDecoration(
                 labelText: 'Número de teléfono',
                 border: OutlineInputBorder(),
@@ -55,6 +58,8 @@ class LoginPage extends StatelessWidget {
             //TexFiel del Correo Institucional
             SizedBox(height: 20),
             TextField(
+              controller: emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: 'Correo Institucional',
                 border: OutlineInputBorder(),
@@ -64,6 +69,9 @@ class LoginPage extends StatelessWidget {
             //TexFiel de contraseña
             SizedBox(height: 20),
             TextField(
+              controller: passwordController,
+              obscureText: true,
+              keyboardType: TextInputType.visiblePassword,
               decoration: InputDecoration(
                 labelText: 'Contraseña',
                 border: OutlineInputBorder(),
@@ -75,7 +83,56 @@ class LoginPage extends StatelessWidget {
               width: double.infinity, 
               child: ElevatedButton(
                 onPressed: () {
-                  // Acción al presionar el botón
+                  // cuando le falta de rellenar los textfields
+                  if(usernameController.text.isEmpty ||
+                      passwordController.text.isEmpty ||
+                      phoneController.text.isEmpty ||
+                      emailController.text.isEmpty) {
+                    showDialog(
+                      context: context,
+                      builder:(context){
+                        return AlertDialog(
+                          title: Text('Opa!'),
+                          content: Text('Por favor rellenar todos los campos.'),
+                          actions: [
+                            TextButton(onPressed: context.pop, child: Text('Aceptar'))
+                          ],
+                        );
+                      }
+                      );
+                    return;
+                    }
+                  // cuando la contraseña es menor a 6 caracteres
+                  if(passwordController.text.length<6 && passwordController.text.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 2),
+                        action: SnackBarAction(
+                        label: 'Cerrar', 
+                        onPressed: (){}),
+                        content: Text('La contraseña debe al menos llevar un caracter especial o ser mayor de 6 digitos.') 
+                      
+                      )
+                    );
+                    return;
+                  }
+
+                  // el correo institucional bien ingresado
+                  if(!emailController.text.contains('@unah.hn')){
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 2),
+                        action: SnackBarAction(
+                        label: 'Cerrar', 
+                        onPressed: (){}),
+                        content: Text('El correo institucional esta mal ingresado.') 
+                      
+                      )
+                    );
+                    return;
+                  }
                    context.push('/home');
                   
                 },
