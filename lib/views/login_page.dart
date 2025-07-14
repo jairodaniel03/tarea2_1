@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
+import "package:tarea2_1/views/Widgets/textfiel_login.dart";
 //import "package:tarea2_1/views/home_page.dart";
 
 class LoginPage extends StatelessWidget {
@@ -34,50 +35,46 @@ class LoginPage extends StatelessWidget {
             SizedBox(height: 20), 
 
           // TextFiel del nombre de usuario
-            TextField(
+            TextfielLogin(
               controller: usernameController,
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(
-                labelText: 'Nombre de usuario',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.person),
-              ),
+              labelText: 'Nombre de Usuario', 
+              icon: Icon(Icons.person), 
             ),
+
+            
 
            //TexFiel del numero de telefono
             SizedBox(height: 20),
-            TextField(
+            TextfielLogin(
               controller: phoneController,
               keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: 'Número de teléfono',
-                border: OutlineInputBorder(),
-              ),
+              labelText: 'Número de Teléfono', 
+              icon: Icon(Icons.phone), 
             ),  
 
             //TexFiel del Correo Institucional
             SizedBox(height: 20),
-            TextField(
+            TextfielLogin(
               controller: emailController,
               keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'Correo Institucional',
-                border: OutlineInputBorder(),
-              ),
+              labelText: 'Correo Institucional', 
+              icon: Icon(Icons.email), 
             ), 
 
             //TexFiel de contraseña
             SizedBox(height: 20),
-            TextField(
+            TextfielLogin(
               controller: passwordController,
+              keyboardType: TextInputType.text,
               obscureText: true,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-                border: OutlineInputBorder(),
-              ),
+              labelText: 'Contraseña', 
+              icon: Icon(Icons.password), 
             ),
-            // Botón de inicio de sesión
+          
+
+
+           // Botón de inicio de sesión
             SizedBox(height: 20),
             SizedBox(
               width: double.infinity, 
@@ -103,7 +100,7 @@ class LoginPage extends StatelessWidget {
                     return;
                     }
                   // cuando la contraseña es menor a 6 caracteres
-                  if(passwordController.text.length<6 && passwordController.text.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
+                  if(passwordController.text.length<6 || !passwordController.text.contains(('20232001147'))){
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.red,
@@ -119,7 +116,7 @@ class LoginPage extends StatelessWidget {
                   }
 
                   // el correo institucional bien ingresado
-                  if(!emailController.text.contains('@unah.hn')){
+                  if(!emailController.text.contains('jdcruzz@unah.hn')){
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: Colors.red,
